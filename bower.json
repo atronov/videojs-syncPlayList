@@ -1,0 +1,19 @@
+{
+  "name": "videojs-syncPlayList",
+  "version": "0.0.0",
+  "authors": [
+    "Alexey Tronov <atronov@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "videojs-playList": "git@github.com:atronov/videojs-playLists.git#5c3de27b5c650b6eecbde0d83d1fe241719ba38b",
+    "promise": "~0.2.2"
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>videojs queue</title>
+    <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/4.12/video.js"></script>
+    <script src="/lib/videojs-playlists.js"></script>
+    <script src="/js/queue.js"></script>
+</head>
+<body>
+    <div class="player1">
+        <video class="video video-js vjs-default-skin" controls
+            preload="auto"
+            data-setup='{}' >
+        </video>
+        <button class="next">next</button>
+        <button class="prev">prev</button>
+    </div>
+    <div class="player2">
+        <video class="video video-js vjs-default-skin" controls
+            preload="auto"
+            data-setup='{}' >
+        </video>
+        <button class="next">next</button>
+        <button class="prev">prev</button>
+    </div>
+    <script>
+        var options1 = {
+            element: document.querySelector(".player1 .video"),
+            prevButton: document.querySelector(".player1 .prev"),
+            nextButton: document.querySelector(".player1 .next"),
+            playListId: 0
+        };
+        var options2 = {
+            element: document.querySelector(".player2 .video"),
+            prevButton: document.querySelector(".player2 .prev"),
+            nextButton: document.querySelector(".player2 .next"),
+            playListId: 1
+        };
+        play(options1);
+        play(options2);
+    </script>
+</body>
+</html>
