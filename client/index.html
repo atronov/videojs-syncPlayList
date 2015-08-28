@@ -6,7 +6,7 @@
     <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
     <script src="http://vjs.zencdn.net/4.12/video.js"></script>
     <script src="/lib/videojs-playlists.js"></script>
-    <script src="/js/queue.js"></script>
+    <script src="/js/videojs-syncPlayList.js"></script>
 </head>
 <body>
     <div class="player1">
@@ -26,17 +26,25 @@
         <button class="prev">prev</button>
     </div>
     <script>
+        function play(options) {
+            var player = videojs(options.element);
+            player.syncPlayList(options);
+        };
         var options1 = {
             element: document.querySelector(".player1 .video"),
-            prevButton: document.querySelector(".player1 .prev"),
-            nextButton: document.querySelector(".player1 .next"),
-            playListId: 0
+            playListId: 0,
+            onListCreated: function(player) {
+                document.querySelector(".player1 .prev").addEventListener("click", player.prev.bind(player));
+                document.querySelector(".player1 .next").addEventListener("click", player.next.bind(player));
+            }
         };
         var options2 = {
             element: document.querySelector(".player2 .video"),
-            prevButton: document.querySelector(".player2 .prev"),
-            nextButton: document.querySelector(".player2 .next"),
-            playListId: 1
+            playListId: 1,
+            onListCreated: function(player) {
+                document.querySelector(".player2 .prev").addEventListener("click", player.prev.bind(player));
+                document.querySelector(".player2 .next").addEventListener("click", player.next.bind(player));
+            }
         };
         play(options1);
         play(options2);

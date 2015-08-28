@@ -11,7 +11,7 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // тут лежат видео-файлы
-app.use("/video", path.join(__dirname, "video"));
+app.use("/video", express.static(path.join(__dirname, "video")));
 
 app.get('/', express.static("/index.html"));
 
