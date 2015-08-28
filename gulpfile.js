@@ -2,37 +2,39 @@
  * Created by vkusny on 16.08.15.
  */
 var gulp = require("gulp"),
-    path = require("path"),
-    rename = require("gulp-rename");
+    uglify = require("gulp-uglify"),
+    concat = require("gulp-concat"),
+    rename = require("gulp-rename"),
+    path = require("path");
 
-var src = "client";
-var dst = "public";
+var dst = "dist",
+    jsFileName = "videojs-syncPlayList.js",
+    minFileName = "videojs-syncPlayList.min.js",
+    bundleFileName = "videojs-syncPlayList.bundle.js";
 
 gulp.task("default", ["build"]);
 
-gulp.task("build", ["html", "js", "lib"]);
+gulp.task("build", ["dev", "min", "bundle"]);
 
-gulp.task("html", function() {
-    gulp.src(path.join(src,"*.html"))
+gulp.task("dev", function() {
+    gulp.src(jsFileName)
         .pipe(gulp.dest(dst));
 });
 
-gulp.task("js", function() {
-    var jsDstPath = path.join(dst,"js");
-    gulp.src(path.join(src,"js/*.js"))
-        .pipe(gulp.dest(jsDstPath));
+gulp.task("min", function() {
+    gulp.src(jsFileName)
+        .pipe(uglify())
+        .pipe(rename(minFileName))
+        .pipe(gulp.dest(dst));
 });
 
-gulp.task("lib", function() {
+gulp.task("bundle", function() {
     gulp.src([
-        "bower_components/videojs-playList/dist/*",
-        "bower_components/promise/promise.js",
+            "bower_components/videojs-playList/dist/videojs-playlists.js",
+            "bower_components/promise/promise.js",
+            jsFileName
         ])
-        .pipe(rename({ dirname: "." }))
-        .pipe(gulp.dest(path.join(dst, "lib")));
-})
-
-gulp.task("watch", function() {
-    gulp.watch(path.join(src,"*.html"), ["html"]);
-    gulp.watch(path.join(src,"**/*.js"), ["js"]);
+        .pipe(uglify())
+        .pipe(concat(bundleFileName))
+        .pipe(gulp.dest(dst));
 })

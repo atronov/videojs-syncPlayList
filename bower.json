@@ -1,16 +1,16 @@
 {
   "name": "videojs-syncPlayList",
+  "description": "Extention of videojs-playList plagin, that sync play-list from server",
   "version": "0.0.0",
+  "license": "MIT",
   "authors": [
     "Alexey Tronov <atronov@gmail.com>"
   ],
-  "license": "MIT",
+  "main": "dist/videojs-syncPlayList.js",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "videojs-playList": "git@github.com:atronov/videojs-playLists.git#5c3de27b5c650b6eecbde0d83d1fe241719ba38b",
