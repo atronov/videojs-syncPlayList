@@ -1,8 +1,7 @@
 // requires Promise, videojs-playList
 
-'use strict';
-
 /**
+ * Play list for videojs which is updated automatically from the server via long-polling
  * @param {Object} options	Configures plagin
  * @param {(number|string)}	options.playListId Id of the play list from server
  * @param {Function} 		[options.onListCreated] Fired after the first response come from server and play list created 
@@ -12,6 +11,8 @@
  * @param {string} 			[options.sinceParamName=since] Param name for server time into http request
  */
 function syncPlayList(options) {
+	'use strict';
+
 	var player = this;
 	
 	checkOptions(options);
