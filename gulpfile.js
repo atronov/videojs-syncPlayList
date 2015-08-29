@@ -4,8 +4,7 @@
 var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     concat = require("gulp-concat"),
-    rename = require("gulp-rename"),
-    path = require("path");
+    rename = require("gulp-rename");
 
 var dst = "dist",
     jsFileName = "videojs-syncPlayList.js",
