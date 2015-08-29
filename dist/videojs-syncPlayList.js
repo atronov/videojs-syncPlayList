@@ -26,7 +26,7 @@ function syncPlayList(options) {
 			serverTime = Number(res.servertime);
 			var videos = res.videos;
 			player.playList(videos);
-			options.onFirstLoad && options.onListCreated(player);
+			options.onListCreated && options.onListCreated(player);
 			var updatePlayList = function() {
 				getList(id, serverTime).then(function(newRes) {
 					newRes = JSON.parse(newRes);
