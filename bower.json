@@ -13,7 +13,7 @@
     "bower_components"
   ],
   "dependencies": {
-    "videojs-playList": "git@github.com:atronov/videojs-playLists.git#5c3de27b5c650b6eecbde0d83d1fe241719ba38b",
+    "videojs-playList": "git@github.com:atronov/videojs-playLists.git#loop",
     "promise": "~0.2.2"
   }
 }
