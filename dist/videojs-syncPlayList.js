@@ -9,6 +9,7 @@
  * @param {string} 			[options.httpPath=/pl] http path to get play list
  * @param {string} 			[options.idParamName=id] Param name of play list ID into http request
  * @param {string} 			[options.sinceParamName=since] Param name for server time into http request
+ * @return {Promise} Fullfill when first play list has been loaded
  */
 function syncPlayList(options) {
 	'use strict';
@@ -16,12 +17,12 @@ function syncPlayList(options) {
 	var player = this;
 	
 	checkOptions(options);
-	init(options);
+	return init(options);
 	
 	function init(options) {
 		var serverTime;
 		var id  = options.playListId;
-		getList(id).then(function(res) {
+		return getList(id).then(function(res) {
 			res = JSON.parse(res);
 			serverTime = Number(res.servertime);
 			var videos = res.videos;
@@ -38,6 +39,7 @@ function syncPlayList(options) {
 				}).then(updatePlayList);
 			};
 			updatePlayList();
+			return player;
 		});
 	}
 	
