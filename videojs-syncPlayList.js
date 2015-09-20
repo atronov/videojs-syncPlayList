@@ -4,7 +4,6 @@
  * Play list for videojs which is updated automatically from the server via long-polling
  * @param {Object} options	Configures plagin
  * @param {(number|string)}	options.playListId Id of the play list from server
- * @param {Function} 		[options.onListCreated] Fired after the first response come from server and play list created 
  * @param {string} 			[options.httpMethod=GET] http method to get play list
  * @param {string} 			[options.httpPath=/pl] http path to get play list
  * @param {string} 			[options.idParamName=id] Param name of play list ID into http request
@@ -27,7 +26,6 @@ function syncPlayList(options) {
 			serverTime = Number(res.servertime);
 			var videos = res.videos;
 			player.playList(videos);
-			options.onListCreated && options.onListCreated(player);
 			var updatePlayList = function() {
 				getList(id, serverTime).then(function(newRes) {
 					newRes = JSON.parse(newRes);
