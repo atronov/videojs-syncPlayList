@@ -29,7 +29,7 @@ function syncPlayList(options) {
             serverTime = Number(res.servertime);
             var videos = res.videos;
             player.playList(videos, {
-                getVideoSource: options.getVideoSouece && options.getVideoSouece.bind(player)
+                getVideoSource: options.getVideoSource && options.getVideoSource.bind(player)
             });
             var updatePlayList = function() {
                 getList(id, serverTime).then(function(newRes) {
