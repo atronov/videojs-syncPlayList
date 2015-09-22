@@ -29,8 +29,8 @@ gulp.task("min", function() {
 
 gulp.task("bundle", function() {
     gulp.src([
+            "bluebird/js/browser/bluebird.js",
             "bower_components/videojs-playList/dist/videojs-playlists.js",
-            "bower_components/promise/promise.js",
             jsFileName
         ])
         .pipe(uglify())

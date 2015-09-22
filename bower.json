@@ -14,6 +14,6 @@
   ],
   "dependencies": {
     "videojs-playList": "git@github.com:atronov/videojs-playLists.git#loop",
-    "promise": "~0.2.2"
+    "bluebird": "~2.10.1"
   }
 }
