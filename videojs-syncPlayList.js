@@ -62,7 +62,7 @@ function syncPlayList(options) {
     
     function extractVideos(res, options) {
         var videos = res[videosField];
-        if (options.rowVideosList) videos = JSON.parse(res.videos); 
+        if (options.rowVideosList) videos = JSON.parse(videos); 
         return videos;
     }
 
