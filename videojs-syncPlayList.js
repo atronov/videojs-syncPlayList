@@ -11,6 +11,9 @@
  * @param {string} 			[options.httpPath=/pl] http path to get play list
  * @param {string} 			[options.idParamName=id] Param name of play list ID into http request
  * @param {string} 			[options.sinceParamName=since] Param name for server time into http request
+ * @param {string}          [options.serverTimeFieldName] Name of field where server time is stored in response JSON
+ * @param {string}          [options.videosFieldName] Name of field where videos array is stored in response JSON
+ * @param {boolean}         [options.rowVideosList] Vidoes list comes not as JSON, but as raw text
  * @return {Promise} Fullfill when first play list has been loaded
  */
 function syncPlayList(options) {
@@ -19,6 +22,8 @@ function syncPlayList(options) {
     var player = this;
 
     checkOptions(options);
+    var serverTimeField = options.serverTimeFieldName || "serverTime";
+    var videosField = options.videosFieldName || "videos";
     return init(options);
 
     function init(options) {
@@ -26,8 +31,11 @@ function syncPlayList(options) {
         var id  = options.playListId;
         return getList(id).then(function(res) {
             res = JSON.parse(res);
-            serverTime = Number(res.servertime);
-            var videos = res.videos;
+            serverTime = Number(res[serverTimeField]);
+            if (!serverTime) {
+                throw new Error("Server time is incorrect or absent:", serverTime);
+            }
+            var videos = extractVideos(res, options);
             player.playList(videos, {
                 getVideoSource: options.getVideoSource && options.getVideoSource.bind(player)
             });
@@ -35,7 +43,7 @@ function syncPlayList(options) {
                 getList(id, serverTime).then(function(newRes) {
                     newRes = JSON.parse(newRes);
                     serverTime = Number(newRes.servertime);
-                    var videos = newRes.videos;
+                    var videos =  extractVideos(newRes, options);
                     player.updatePlayList(videos);
                 }).catch(function(er) {
                     console.error(er);
@@ -50,6 +58,12 @@ function syncPlayList(options) {
         if (!options.playListId && options.playListId !== 0) {
             throw new Error("options.playListId required");
         }
+    }
+    
+    function extractVideos(res, options) {
+        var videos = res[videosField];
+        if (options.rowVideosList) videos = JSON.parse(res.videos); 
+        return videos;
     }
 
     function getList(id, since) {
