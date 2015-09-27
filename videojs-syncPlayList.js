@@ -31,10 +31,7 @@ function syncPlayList(options) {
         var id  = options.playListId;
         return getList(id).then(function(res) {
             res = JSON.parse(res);
-            serverTime = Number(res[serverTimeField]);
-            if (!serverTime) {
-                throw new Error("Server time is incorrect or absent:", serverTime);
-            }
+            serverTime = extractServerTime(res);
             var videos = extractVideos(res, options);
             player.playList(videos, {
                 getVideoSource: options.getVideoSource && options.getVideoSource.bind(player)
@@ -42,7 +39,7 @@ function syncPlayList(options) {
             var updatePlayList = function() {
                 getList(id, serverTime).then(function(newRes) {
                     newRes = JSON.parse(newRes);
-                    serverTime = Number(newRes.servertime);
+                    serverTime = extractServerTime(newRes);
                     var videos =  extractVideos(newRes, options);
                     player.updatePlayList(videos);
                 }).catch(function(er) {
@@ -64,6 +61,14 @@ function syncPlayList(options) {
         var videos = res[videosField];
         if (options.rowVideosList) videos = JSON.parse(videos); 
         return videos;
+    }
+    
+    function extractServerTime(res) {
+        var serverTime = Number(res[serverTimeField]);
+        if (!serverTime) {
+                throw new Error("Server time is incorrect or absent:", serverTime);
+        }
+        return serverTime;
     }
 
     function getList(id, since) {
