@@ -56,17 +56,17 @@ function syncPlayList(options) {
             throw new Error("options.playListId required");
         }
     }
-    
+
     function extractVideos(res, options) {
         var videos = res[videosField];
-        if (options.rowVideosList) videos = JSON.parse(videos); 
+        if (options.rowVideosList) videos = JSON.parse(videos);
         return videos;
     }
-    
+
     function extractServerTime(res) {
         var serverTime = Number(res[serverTimeField]);
         if (!serverTime) {
-                throw new Error("Server time is incorrect or absent:", serverTime);
+            throw new Error("Server time is incorrect or absent:", serverTime);
         }
         return serverTime;
     }
