@@ -27,9 +27,10 @@ Server must response with JSON structure
 ```javascript
 {
 	serverTime: 1443648042244, // seconds of server time
-	videos: { ... } // structure for videojs-playLists plugin, described here https://github.com/jgallen23/videojs-playLists#initialize-playlist
+	videos: { ... } // play-list structure for videojs-playLists plugin
 }
 ```
+Structure of videos descrided on [videojs-playLists plugin page](https://github.com/jgallen23/videojs-playLists#initialize-playlist).
 Then client will make http-request to get play-list updates
 ```
 http://youserver/playList?id=100500&since=1443648042244
