@@ -23,7 +23,7 @@ Certainly current example will make GET http-request
 ```
 http://youserver/playList?id=100500
 ```
-Server must return response with JSON structure
+Server must response with JSON structure
 ```javascript
 {
 	serverTime: 1443648042244, // seconds of server time
