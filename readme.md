@@ -30,8 +30,8 @@ Server must response with JSON structure
 	videos: { ... } // play-list structure for videojs-playLists plugin
 }
 ```
-Structure of videos descrided on [videojs-playLists plugin page](https://github.com/jgallen23/videojs-playLists#initialize-playlist).
-Then client will make http-request to get play-list updates
+Structure of videos descrided on [videojs-playLists plugin page](https://github.com/jgallen23/videojs-playLists#initialize-playlist).<br/>
+Then client will make http-request again to get updates
 ```
 http://youserver/playList?id=100500&since=1443648042244
 ```
